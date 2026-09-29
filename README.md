@@ -22,15 +22,27 @@ to different windows. The current display-plugin format accepts one fixed HTTPS
 source per package. Service choice therefore happens by installing the matching
 package, rather than through a setting in the companion app.
 
-This repository is private, so the companion cannot install its packages from
-an unauthenticated GitHub URL. Download the chosen `.aimplugin` file while
-signed in to GitHub, or use a local clone of this repository. In **Plugins**,
-choose the local file, inspect its author, HTTPS data origin, checksum and
-unsigned state, then install it. In **Display**, assign the new view to a
-window and select it. The companion and firmware must support display plugins
-(`sceneProtocol: 1`). These packages also use the companion's localization and
-light-theme extensions; older companion builds that lack them will reject the
-package.
+## Install
+
+1. Use a Mac or Windows AI Monitor companion with the **Plugins** tab. Connect
+   firmware that reports `"sceneProtocol":1` in `get_info`. The companion must
+   also support plugin localization and light scenes; older builds reject these
+   packages.
+2. While signed in to GitHub, open the desired `.aimplugin` file in this
+   repository and click **Download raw file**. Alternatively, use the file from
+   a local clone of this repository.
+3. In the companion's **Plugins** tab, choose the downloaded local file and
+   click **Inspect**. Confirm the service name, author, official HTTPS data
+   origin, checksum and unsigned state, then click **Install**.
+4. In **Display**, add the service view to a window and select that window.
+   Leave the companion connected to the ESP32 over USB. The first status should
+   appear after the companion fetches the service's public JSON endpoint.
+5. To monitor another service, repeat steps 2–4 with its package and assign it
+   to another window. You can use manual or timed window switching.
+
+This repository is private. Do not paste a GitHub file or raw URL into the
+companion's URL installer: it cannot authenticate to private GitHub downloads.
+Use the local file import described above.
 
 The view refreshes about every five minutes while assigned to a window. It
 shows the page's overall indicator as Operational, Degraded, Major outage,
