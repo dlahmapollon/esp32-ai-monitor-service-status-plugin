@@ -1,0 +1,896 @@
+{
+  "formatVersion": 1,
+  "id": "org.aimonitor.status.claude",
+  "name": "Claude Status",
+  "version": "1.0.0",
+  "author": "AI Monitor contributors",
+  "description": "Public service health from the official Claude status page.",
+  "viewLabel": "Claude",
+  "attribution": "Status data by Claude",
+  "minSceneProtocol": 1,
+  "source": {
+    "url": "https://status.claude.com/api/v2/status.json",
+    "intervalSeconds": 300
+  },
+  "settings": [],
+  "bindings": [
+    {
+      "name": "state",
+      "path": "status.indicator",
+      "format": "map",
+      "suffix": "",
+      "map": {
+        "none": "Operational",
+        "minor": "Degraded",
+        "major": "Major outage",
+        "critical": "Critical outage",
+        "maintenance": "Maintenance"
+      },
+      "fallback": "Unknown"
+    }
+  ],
+  "localizations": {
+    "de": {
+      "Claude Status": "Claude Status",
+      "Public service health from the official Claude status page.": "Oeffentlicher Dienststatus der offiziellen Claude-Statusseite.",
+      "Status data by Claude": "Statusdaten von Claude",
+      "SERVICE STATUS": "DIENSTSTATUS",
+      "Operational": "Betriebsbereit",
+      "Degraded": "Eingeschraenkt",
+      "Major outage": "Groessere Stoerung",
+      "Critical outage": "Schwere Stoerung",
+      "Maintenance": "Wartung",
+      "Unknown": "Unbekannt",
+      "Official status page": "Offizielle Statusseite",
+      "Updated every 5 min": "Update alle 5 Min"
+    }
+  },
+  "scenes": {
+    "portrait": {
+      "background": 1317677,
+      "nodes": [
+        {
+          "type": "text",
+          "x": 65,
+          "y": 70,
+          "w": 870,
+          "h": 60,
+          "color": 11188172,
+          "font": 16,
+          "text": "SERVICE STATUS"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 150,
+          "w": 870,
+          "h": 90,
+          "color": 16777215,
+          "font": 36,
+          "text": "Claude"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 270,
+          "w": 870,
+          "h": 3,
+          "color": 3227740
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 4442507,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Operational"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 16104261,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Degraded"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 15758693,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Major outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 15758693,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Critical outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 7439782,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Maintenance"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 7439782,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Unknown"
+          }
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 475,
+          "w": 870,
+          "h": 135,
+          "color": 16777215,
+          "font": 36,
+          "text": "{{state}}"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 725,
+          "w": 870,
+          "h": 3,
+          "color": 3227740
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 775,
+          "w": 870,
+          "h": 65,
+          "color": 11188172,
+          "font": 16,
+          "text": "Official status page"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 865,
+          "w": 870,
+          "h": 55,
+          "color": 11188172,
+          "font": 14,
+          "text": "Updated every 5 min"
+        }
+      ]
+    },
+    "landscape": {
+      "background": 1317677,
+      "nodes": [
+        {
+          "type": "text",
+          "x": 50,
+          "y": 80,
+          "w": 900,
+          "h": 70,
+          "color": 11188172,
+          "font": 16,
+          "text": "SERVICE STATUS"
+        },
+        {
+          "type": "text",
+          "x": 50,
+          "y": 190,
+          "w": 900,
+          "h": 135,
+          "color": 16777215,
+          "font": 48,
+          "text": "Claude"
+        },
+        {
+          "type": "rect",
+          "x": 50,
+          "y": 370,
+          "w": 900,
+          "h": 4,
+          "color": 3227740
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 4442507,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Operational"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 16104261,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Degraded"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 15758693,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Major outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 15758693,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Critical outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 7439782,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Maintenance"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 7439782,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Unknown"
+          }
+        },
+        {
+          "type": "text",
+          "x": 185,
+          "y": 450,
+          "w": 765,
+          "h": 145,
+          "color": 16777215,
+          "font": 36,
+          "text": "{{state}}"
+        },
+        {
+          "type": "text",
+          "x": 50,
+          "y": 800,
+          "w": 550,
+          "h": 80,
+          "color": 11188172,
+          "font": 14,
+          "text": "Official status page"
+        },
+        {
+          "type": "text",
+          "x": 620,
+          "y": 800,
+          "w": 330,
+          "h": 80,
+          "color": 11188172,
+          "font": 12,
+          "align": "right",
+          "text": "Updated every 5 min"
+        }
+      ]
+    },
+    "square": {
+      "background": 1317677,
+      "nodes": [
+        {
+          "type": "text",
+          "x": 65,
+          "y": 70,
+          "w": 870,
+          "h": 65,
+          "color": 11188172,
+          "font": 20,
+          "text": "SERVICE STATUS"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 175,
+          "w": 870,
+          "h": 110,
+          "color": 16777215,
+          "font": 48,
+          "text": "Claude"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 325,
+          "w": 870,
+          "h": 3,
+          "color": 3227740
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 4442507,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Operational"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 16104261,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Degraded"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 15758693,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Major outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 15758693,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Critical outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 7439782,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Maintenance"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 7439782,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Unknown"
+          }
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 570,
+          "w": 870,
+          "h": 115,
+          "color": 16777215,
+          "font": 36,
+          "text": "{{state}}"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 760,
+          "w": 870,
+          "h": 3,
+          "color": 3227740
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 805,
+          "w": 870,
+          "h": 65,
+          "color": 11188172,
+          "font": 16,
+          "text": "Official status page"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 885,
+          "w": 870,
+          "h": 60,
+          "color": 11188172,
+          "font": 14,
+          "text": "Updated every 5 min"
+        }
+      ]
+    }
+  },
+  "lightScenes": {
+    "portrait": {
+      "background": 16119802,
+      "nodes": [
+        {
+          "type": "text",
+          "x": 65,
+          "y": 70,
+          "w": 870,
+          "h": 60,
+          "color": 4544106,
+          "font": 16,
+          "text": "SERVICE STATUS"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 150,
+          "w": 870,
+          "h": 90,
+          "color": 1515823,
+          "font": 36,
+          "text": "Claude"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 270,
+          "w": 870,
+          "h": 3,
+          "color": 13950439
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 1474647,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Operational"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 12088576,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Degraded"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 12729142,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Major outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 12729142,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Critical outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 6583435,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Maintenance"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 350,
+          "w": 135,
+          "h": 100,
+          "color": 6583435,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Unknown"
+          }
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 475,
+          "w": 870,
+          "h": 135,
+          "color": 1515823,
+          "font": 36,
+          "text": "{{state}}"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 725,
+          "w": 870,
+          "h": 3,
+          "color": 13950439
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 775,
+          "w": 870,
+          "h": 65,
+          "color": 4544106,
+          "font": 16,
+          "text": "Official status page"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 865,
+          "w": 870,
+          "h": 55,
+          "color": 4544106,
+          "font": 14,
+          "text": "Updated every 5 min"
+        }
+      ]
+    },
+    "landscape": {
+      "background": 16119802,
+      "nodes": [
+        {
+          "type": "text",
+          "x": 50,
+          "y": 80,
+          "w": 900,
+          "h": 70,
+          "color": 4544106,
+          "font": 16,
+          "text": "SERVICE STATUS"
+        },
+        {
+          "type": "text",
+          "x": 50,
+          "y": 190,
+          "w": 900,
+          "h": 135,
+          "color": 1515823,
+          "font": 48,
+          "text": "Claude"
+        },
+        {
+          "type": "rect",
+          "x": 50,
+          "y": 370,
+          "w": 900,
+          "h": 4,
+          "color": 13950439
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 1474647,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Operational"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 12088576,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Degraded"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 12729142,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Major outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 12729142,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Critical outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 6583435,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Maintenance"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 50,
+          "y": 465,
+          "w": 95,
+          "h": 120,
+          "color": 6583435,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Unknown"
+          }
+        },
+        {
+          "type": "text",
+          "x": 185,
+          "y": 450,
+          "w": 765,
+          "h": 145,
+          "color": 1515823,
+          "font": 36,
+          "text": "{{state}}"
+        },
+        {
+          "type": "text",
+          "x": 50,
+          "y": 800,
+          "w": 550,
+          "h": 80,
+          "color": 4544106,
+          "font": 14,
+          "text": "Official status page"
+        },
+        {
+          "type": "text",
+          "x": 620,
+          "y": 800,
+          "w": 330,
+          "h": 80,
+          "color": 4544106,
+          "font": 12,
+          "align": "right",
+          "text": "Updated every 5 min"
+        }
+      ]
+    },
+    "square": {
+      "background": 16119802,
+      "nodes": [
+        {
+          "type": "text",
+          "x": 65,
+          "y": 70,
+          "w": 870,
+          "h": 65,
+          "color": 4544106,
+          "font": 20,
+          "text": "SERVICE STATUS"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 175,
+          "w": 870,
+          "h": 110,
+          "color": 1515823,
+          "font": 48,
+          "text": "Claude"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 325,
+          "w": 870,
+          "h": 3,
+          "color": 13950439
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 1474647,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Operational"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 12088576,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Degraded"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 12729142,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Major outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 12729142,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Critical outage"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 6583435,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Maintenance"
+          }
+        },
+        {
+          "type": "circle",
+          "x": 65,
+          "y": 425,
+          "w": 115,
+          "h": 115,
+          "color": 6583435,
+          "visibleWhen": {
+            "binding": "state",
+            "equals": "Unknown"
+          }
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 570,
+          "w": 870,
+          "h": 115,
+          "color": 1515823,
+          "font": 36,
+          "text": "{{state}}"
+        },
+        {
+          "type": "rect",
+          "x": 65,
+          "y": 760,
+          "w": 870,
+          "h": 3,
+          "color": 13950439
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 805,
+          "w": 870,
+          "h": 65,
+          "color": 4544106,
+          "font": 16,
+          "text": "Official status page"
+        },
+        {
+          "type": "text",
+          "x": 65,
+          "y": 885,
+          "w": 870,
+          "h": 60,
+          "color": 4544106,
+          "font": 14,
+          "text": "Updated every 5 min"
+        }
+      ]
+    }
+  }
+}

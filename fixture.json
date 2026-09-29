@@ -1,0 +1,9 @@
+{
+  "page": {
+    "name": "Example Status"
+  },
+  "status": {
+    "indicator": "minor",
+    "description": "Partial System Degradation"
+  }
+}
