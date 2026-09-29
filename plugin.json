@@ -143,7 +143,7 @@
           "y": 350,
           "w": 135,
           "h": 100,
-          "color": 7439782,
+          "color": 6252144,
           "visibleWhen": {
             "binding": "state",
             "equals": "Unknown"
@@ -156,7 +156,7 @@
           "w": 870,
           "h": 135,
           "color": 16777215,
-          "font": 36,
+          "font": 20,
           "text": "{{state}}"
         },
         {
@@ -286,7 +286,7 @@
           "y": 465,
           "w": 95,
           "h": 120,
-          "color": 7439782,
+          "color": 6252144,
           "visibleWhen": {
             "binding": "state",
             "equals": "Unknown"
@@ -299,7 +299,7 @@
           "w": 765,
           "h": 145,
           "color": 16777215,
-          "font": 36,
+          "font": 24,
           "text": "{{state}}"
         },
         {
@@ -422,7 +422,7 @@
           "y": 425,
           "w": 115,
           "h": 115,
-          "color": 7439782,
+          "color": 6252144,
           "visibleWhen": {
             "binding": "state",
             "equals": "Unknown"
@@ -567,7 +567,7 @@
           "y": 350,
           "w": 135,
           "h": 100,
-          "color": 6583435,
+          "color": 7568778,
           "visibleWhen": {
             "binding": "state",
             "equals": "Unknown"
@@ -580,7 +580,7 @@
           "w": 870,
           "h": 135,
           "color": 1515823,
-          "font": 36,
+          "font": 20,
           "text": "{{state}}"
         },
         {
@@ -710,7 +710,7 @@
           "y": 465,
           "w": 95,
           "h": 120,
-          "color": 6583435,
+          "color": 7568778,
           "visibleWhen": {
             "binding": "state",
             "equals": "Unknown"
@@ -723,7 +723,7 @@
           "w": 765,
           "h": 145,
           "color": 1515823,
-          "font": 36,
+          "font": 24,
           "text": "{{state}}"
         },
         {
@@ -846,7 +846,7 @@
           "y": 425,
           "w": 115,
           "h": 115,
-          "color": 6583435,
+          "color": 7568778,
           "visibleWhen": {
             "binding": "state",
             "equals": "Unknown"

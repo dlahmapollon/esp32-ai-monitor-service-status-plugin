@@ -71,8 +71,11 @@ python3 scripts/package.py --custom example "Example Service" \
 ```
 
 This creates `status-example.aimplugin` with its own stable plugin ID. Use a
-different lowercase ID for each service. Confirm that the endpoint returns
-JSON with `status.indicator` and the standard Statuspage values before
+different lowercase ID for each service; the preset IDs `claude`, `openai`,
+and `github` are reserved. The display name may contain up to 16 printable
+ASCII characters, excluding braces. Confirm that the endpoint returns JSON
+with `status.indicator` and the standard Statuspage values. Then run the
+`inspect` and `render` commands below with your new package name before
 installing. The plugin host does not follow HTTP redirects, so use the final
 HTTPS address. No account or API key should appear in the URL.
 
@@ -92,8 +95,13 @@ cargo run --quiet --locked --manifest-path ../esp32-ai-monitor/companion-windows
 ```
 
 Repeat the `inspect` and `render` commands with `status-openai.aimplugin` and
-`status-github.aimplugin`. To check the live source, omit `fixture.json` from
-the render command. This calls the service over HTTPS. Then follow the
+`status-github.aimplugin`. Test the remaining status labels and colors by
+substituting `fixtures/operational.json`, `fixtures/major.json`,
+`fixtures/critical.json`, `fixtures/maintenance.json`, and
+`fixtures/unknown.json` for `fixture.json` in the render command. The last
+fixture checks the fallback for an unrecognized indicator. To check the live
+source, omit the fixture path from the render command. This calls the service
+over HTTPS. Then follow the
 [hardware test guide](docs/hardware-test.md) to verify the actual display,
 window switching, offline behavior and restart persistence.
 

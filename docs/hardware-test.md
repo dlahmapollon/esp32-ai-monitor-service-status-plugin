@@ -25,5 +25,6 @@ selected package. The firmware should report `"sceneProtocol":1` in
    assigned window is handled correctly.
 
 Live pages may remain operational throughout the test. Use the host render
-command with a synthetic `status.indicator` value to check outage colors and
-labels without waiting for a real incident.
+command with the sample responses in `fixture.json` and `fixtures/` to check
+every indicator color and label, including the `Unknown` fallback, without
+waiting for a real incident.

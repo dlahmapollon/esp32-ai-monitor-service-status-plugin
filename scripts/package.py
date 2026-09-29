@@ -9,7 +9,7 @@ import json
 import re
 from pathlib import Path
 from urllib.parse import urlsplit
-from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
+from zipfile import ZIP_STORED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "plugin.json"
@@ -21,6 +21,8 @@ PRESETS = {
 
 
 def source_url(value: str) -> str:
+    if not value.isascii() or any(not 0x21 <= ord(char) <= 0x7E for char in value):
+        raise ValueError("URL must contain only printable ASCII without whitespace")
     url = urlsplit(value)
     if (
         url.scheme != "https"
@@ -38,11 +40,12 @@ def source_url(value: str) -> str:
 def make_manifest(slug: str, name: str, url: str) -> bytes:
     if not re.fullmatch(r"[a-z][a-z0-9-]{0,15}", slug):
         raise ValueError("service ID must be 1-16 lowercase letters, digits or hyphens")
-    if not name or len(name) > 24 or not name.isascii() or not name.isprintable():
-        raise ValueError("service name must be 1-24 printable ASCII characters")
+    if (not name or len(name) > 16 or not name.isascii() or not name.isprintable()
+            or "{" in name or "}" in name):
+        raise ValueError("service name must be 1-16 printable ASCII characters without braces")
     manifest = copy.deepcopy(json.loads(MANIFEST.read_text(encoding="utf-8")))
     manifest["id"] = f"org.aimonitor.status.{slug}"
-    manifest["source"]["url"] = source_url(url)
+    validated_url = source_url(url)
 
     def rename(value):
         if isinstance(value, str):
@@ -54,9 +57,14 @@ def make_manifest(slug: str, name: str, url: str) -> bytes:
         return value
 
     manifest = rename(manifest)
-    # Name replacement above leaves the status URL unchanged unless the custom
-    # service name itself contains "Claude"; always restore the validated URL.
-    manifest["source"]["url"] = url
+    manifest["source"]["url"] = validated_url
+    if len(name) > 10:
+        # Keep longer custom names within the title boxes on smaller panels.
+        for variant in ("scenes", "lightScenes"):
+            for layout, font in (("portrait", 20), ("landscape", 24), ("square", 36)):
+                for node in manifest[variant][layout]["nodes"]:
+                    if node["type"] == "text" and node["text"] == name:
+                        node["font"] = font
     return (json.dumps(manifest, ensure_ascii=True, indent=2) + "\n").encode("utf-8")
 
 
@@ -65,11 +73,16 @@ def make_package(manifest: bytes) -> bytes:
         raise ValueError("manifest exceeds the plugin format limit")
     stream = io.BytesIO()
     info = ZipInfo("plugin.json", (1980, 1, 1, 0, 0, 0))
-    info.compress_type = ZIP_DEFLATED
+    info.create_system = 3
+    # Stored bytes avoid zlib-version differences between Windows and Linux.
+    info.compress_type = ZIP_STORED
     info.external_attr = 0o100644 << 16
     with ZipFile(stream, "w") as archive:
         archive.writestr(info, manifest)
-    return stream.getvalue()
+    package = stream.getvalue()
+    if len(package) > 256 * 1024:
+        raise ValueError("package exceeds the plugin format limit")
+    return package
 
 
 def main() -> None:
@@ -80,6 +93,8 @@ def main() -> None:
     args = parser.parse_args()
     if args.check and args.custom:
         parser.error("--check and --custom cannot be combined")
+    if args.custom and args.custom[0] in PRESETS:
+        parser.error("custom service ID must not replace a preset package")
     services = {args.custom[0]: (args.custom[1], args.custom[2])} if args.custom else PRESETS
     for slug, (name, url) in services.items():
         try:
@@ -88,7 +103,9 @@ def main() -> None:
             parser.error(str(error))
         path = ROOT / f"status-{slug}.aimplugin"
         if args.check:
-            if not path.is_file() or path.read_bytes() != package:
+            if not path.is_file():
+                parser.error(f"{path.name} is missing; run python3 scripts/package.py")
+            if path.read_bytes() != package:
                 parser.error(f"{path.name} differs from plugin.json; rebuild it")
             with ZipFile(path) as archive:
                 if archive.namelist() != ["plugin.json"]:
