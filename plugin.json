@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "id": "org.aimonitor.status.claude",
   "name": "Claude Status",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "AI Monitor contributors",
   "description": "Public service health from the official Claude status page.",
   "viewLabel": "Claude",
@@ -64,7 +64,7 @@
           "x": 65,
           "y": 150,
           "w": 870,
-          "h": 90,
+          "h": 150,
           "color": 16777215,
           "font": 36,
           "text": "Claude"
@@ -72,7 +72,7 @@
         {
           "type": "rect",
           "x": 65,
-          "y": 270,
+          "y": 325,
           "w": 870,
           "h": 3,
           "color": 3227740
@@ -205,9 +205,9 @@
         {
           "type": "text",
           "x": 50,
-          "y": 190,
+          "y": 170,
           "w": 900,
-          "h": 135,
+          "h": 250,
           "color": 16777215,
           "font": 48,
           "text": "Claude"
@@ -215,7 +215,7 @@
         {
           "type": "rect",
           "x": 50,
-          "y": 370,
+          "y": 435,
           "w": 900,
           "h": 4,
           "color": 3227740
@@ -343,7 +343,7 @@
           "x": 65,
           "y": 175,
           "w": 870,
-          "h": 110,
+          "h": 140,
           "color": 16777215,
           "font": 48,
           "text": "Claude"
@@ -488,7 +488,7 @@
           "x": 65,
           "y": 150,
           "w": 870,
-          "h": 90,
+          "h": 150,
           "color": 1515823,
           "font": 36,
           "text": "Claude"
@@ -496,7 +496,7 @@
         {
           "type": "rect",
           "x": 65,
-          "y": 270,
+          "y": 325,
           "w": 870,
           "h": 3,
           "color": 13950439
@@ -629,9 +629,9 @@
         {
           "type": "text",
           "x": 50,
-          "y": 190,
+          "y": 170,
           "w": 900,
-          "h": 135,
+          "h": 250,
           "color": 1515823,
           "font": 48,
           "text": "Claude"
@@ -639,7 +639,7 @@
         {
           "type": "rect",
           "x": 50,
-          "y": 370,
+          "y": 435,
           "w": 900,
           "h": 4,
           "color": 13950439
@@ -767,7 +767,7 @@
           "x": 65,
           "y": 175,
           "w": 870,
-          "h": 110,
+          "h": 140,
           "color": 1515823,
           "font": 48,
           "text": "Claude"

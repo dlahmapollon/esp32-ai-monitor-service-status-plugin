@@ -28,3 +28,24 @@ Live pages may remain operational throughout the test. Use the host render
 command with the sample responses in `fixture.json` and `fixtures/` to check
 every indicator color and label, including the `Unknown` fallback, without
 waiting for a real incident.
+
+## Text-box sizing
+
+Firmware scales node coordinates and box dimensions from 0-1000 to panel
+pixels, but Montserrat font sizes remain fixed pixel sizes. A title box must
+fit the complete font line height on the smallest supported panel. On the
+320x240 CYD in landscape, a height of 250 provides 60 pixels for the
+48-pixel title font. Check the bottom of the service title, including
+descenders, in both themes and orientations; successful host rendering alone
+does not prove that firmware text is unclipped.
+
+## Verified hardware result — 2026-10-01
+
+Daniel confirmed complete service titles and readable status text for Claude,
+OpenAI and GitHub v1.0.1 on a CYD ILI9341, firmware 2.23.0-beta.1, using
+the Windows PR-7 test companion, German language, dark theme and landscape-left
+orientation. The device acknowledged scenes for all three live sources.
+Package consistency and 72 host-render combinations (three services, two
+themes, two languages and six status fixtures, each with all layouts) passed.
+Portrait, landscape-right, light-theme hardware and S3 hardware were not
+visually verified in this test.
