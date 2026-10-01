@@ -1,8 +1,8 @@
 {
-  "formatVersion": 1,
+  "formatVersion": 2,
   "id": "org.aimonitor.status.claude",
   "name": "Claude Status",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "AI Monitor contributors",
   "description": "Public service health from the official Claude status page.",
   "viewLabel": "Claude",
@@ -892,5 +892,25 @@
         }
       ]
     }
-  }
+  },
+  "attentionRules": [
+    {
+      "id": "degraded",
+      "path": "status.indicator",
+      "operator": "equals",
+      "value": "minor"
+    },
+    {
+      "id": "major-outage",
+      "path": "status.indicator",
+      "operator": "equals",
+      "value": "major"
+    },
+    {
+      "id": "critical-outage",
+      "path": "status.indicator",
+      "operator": "equals",
+      "value": "critical"
+    }
+  ]
 }
