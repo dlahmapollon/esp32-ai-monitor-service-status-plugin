@@ -1,110 +1,139 @@
-# AI Monitor Service Status plugin
+# AI Monitor Service Status Plugins
 
-Public service health for the [AI Monitor](https://github.com/tobymarks/esp32-ai-monitor)
-ESP32 display. The companion app fetches a Statuspage-compatible JSON endpoint
-and sends a small scene over USB. The package contains only a declarative
-manifest; it runs no third-party code on the computer or ESP32. This repository
-contains the plugin packages and their source manifest, separate from the
-companion application's plugin manager.
+Show the public service status of **Claude, OpenAI and GitHub** on your
+[AI Monitor](https://github.com/tobymarks/esp32-ai-monitor) ESP32 desk display.
 
-## Choose a service
+Each service has its own installable `.aimplugin` package. The AI Monitor
+companion app fetches the official status feed and sends the display scene to
+the ESP32 over USB. No service account or API key is required.
 
-Install the package for the status page you want to see:
+## Download
 
-| Package | Status page |
+Current package version: **1.0.1**.
+
+| Service | Download package | Official status page |
+| --- | --- | --- |
+| Claude | [status-claude.aimplugin](https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/main/status-claude.aimplugin) | [status.claude.com](https://status.claude.com/) |
+| OpenAI | [status-openai.aimplugin](https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/main/status-openai.aimplugin) | [status.openai.com](https://status.openai.com/) |
+| GitHub | [status-github.aimplugin](https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/main/status-github.aimplugin) | [githubstatus.com](https://www.githubstatus.com/) |
+
+Install one service or all three. Each installed package becomes a separate
+view that you can assign to a display window.
+
+## Requirements
+
+- An AI Monitor ESP32 display, connected to your computer with a USB data cable.
+- The Windows or macOS AI Monitor companion app with a **Plugins** tab and
+  support for localized plugins and light scenes.
+- Firmware that reports `sceneProtocol: 1` in its `get_info` response.
+- Internet access on the computer for the official status feeds.
+
+Get the companion app and firmware from the
+[AI Monitor project](https://github.com/tobymarks/esp32-ai-monitor).
+Plugin support depends on the companion and firmware build: if the Plugins tab
+is missing or the package is rejected as unsupported, update to a build that
+includes the required features. Once compatible firmware is installed,
+adding these plugins does not require another firmware flash.
+
+## Installation
+
+### Install a downloaded file
+
+1. Download a package from the table above. Keep its `.aimplugin` extension;
+   do not unzip it. If your browser displays the file instead, open it in the
+   [repository file list](https://github.com/dlahmapollon/esp32-ai-monitor-service-status-plugin)
+   and choose **Download raw file**.
+2. Open the AI Monitor companion app and select **Plugins**.
+3. Choose the local `.aimplugin` file, then click **Inspect**.
+4. Check the service name, version, author, official HTTPS data origin and
+   SHA-256 checksum. These packages are unsigned; this is expected.
+5. Click **Install**.
+6. Open **Display**, add the service view to a window and select that window.
+7. Keep the companion app running and the ESP32 connected over USB. The status
+   appears after the companion fetches the service feed.
+
+Repeat these steps for additional services. Use touch navigation or timed
+window switching to move between your status views and existing AI dashboards.
+
+### Install from a URL
+
+The companion also accepts a direct HTTPS package URL in **Plugins**. Paste one
+of the following URLs into the source field, click **Inspect**, review the
+package, then click **Install**. Assign it to a window as described above.
+
+**Claude**
+
+```text
+https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/main/status-claude.aimplugin
+```
+
+**OpenAI**
+
+```text
+https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/main/status-openai.aimplugin
+```
+
+**GitHub**
+
+```text
+https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/main/status-github.aimplugin
+```
+
+Use the raw package URL, rather than a GitHub `blob` page URL. The links above
+track the packages on `main`; inspecting before installation shows the version
+and checksum you are about to install.
+
+## What the display shows
+
+The view shows the service name, a colored indicator and the official status
+page's overall state:
+
+| Status | Indicator |
 | --- | --- |
-| `status-claude.aimplugin` | [Claude](https://status.claude.com/) |
-| `status-openai.aimplugin` | [OpenAI](https://status.openai.com/) |
-| `status-github.aimplugin` | [GitHub](https://www.githubstatus.com/) |
+| Operational | Green |
+| Degraded | Amber |
+| Major outage / Critical outage | Red |
+| Maintenance | Purple |
+| Unknown | Gray |
 
-Each package is a separate view, so more than one can be installed and assigned
-to different windows. The current display-plugin format accepts one fixed HTTPS
-source per package. Service choice therefore happens by installing the matching
-package, rather than through a setting in the companion app.
+Data refreshes approximately every five minutes while the view is assigned to
+a window. The layouts support portrait, landscape and square displays, dark
+and light themes, and English and ASCII-only German text.
 
-## Install
+The overall status is an aggregate: an operational page does not guarantee
+that every component, product or account is unaffected. For incident details,
+open the service's official status page.
 
-1. Use a Mac or Windows AI Monitor companion with the **Plugins** tab. Connect
-   firmware that reports `"sceneProtocol":1` in `get_info`. The companion must
-   also support plugin localization and light scenes; older builds reject these
-   packages.
-2. While signed in to GitHub, open the desired `.aimplugin` file in this
-   repository and click **Download raw file**. Alternatively, use the file from
-   a local clone of this repository.
-3. In the companion's **Plugins** tab, choose the downloaded local file and
-   click **Inspect**. Confirm the service name, author, official HTTPS data
-   origin, checksum and unsigned state, then click **Install**.
-4. In **Display**, add the service view to a window and select that window.
-   Leave the companion connected to the ESP32 over USB. The first status should
-   appear after the companion fetches the service's public JSON endpoint.
-5. To monitor another service, repeat steps 2–4 with its package and assign it
-   to another window. You can use manual or timed window switching.
+## Troubleshooting
 
-This repository is private. Do not paste a GitHub file or raw URL into the
-companion's URL installer: it cannot authenticate to private GitHub downloads.
-Use the local file import described above.
+| Symptom | What to check |
+| --- | --- |
+| No Plugins tab | Use a companion build with display-plugin support. |
+| Package rejected | Check support for localization and light scenes; download the actual `.aimplugin` file. |
+| Installed, but nothing appears | Add the service view to a Display window and select it. Check the USB connection. |
+| Error or stale-data screen | Check the computer's internet access and the official status feed. The companion provides the error screens. |
+| No updates after closing the app | Keep the companion running. These plugins fetch data on the computer, not over ESP32 Wi-Fi. |
+| Want to update a plugin | Inspect and install the newer package with the same plugin ID. |
 
-The view refreshes about every five minutes while assigned to a window. It
-shows the page's overall indicator as Operational, Degraded, Major outage,
-Critical outage, Maintenance or Unknown. The status color and text work in
-portrait, landscape and square layouts, with dark and light themes and English
-and ASCII-only German display text. Network failures and stale data use the
-companion's built-in status screens. A healthy overall status does not guarantee
-that every individual product or account is unaffected.
+## Validation and development
 
-## Build another Statuspage service
+Version 1.0.1 was visually checked on a CYD ILI9341 in landscape-left,
+with German text and the dark theme, for all three services. Package checks
+and host rendering passed for all layouts, both themes, both languages and
+six status fixtures. Other hardware and orientations have not all been
+visually verified; see the [hardware test guide](docs/hardware-test.md).
 
-`plugin.json` is the Claude source manifest. Python's standard library builds
-the deterministic preset packages:
+To rebuild the three deterministic packages using Python's standard library:
 
 ```sh
 python3 scripts/package.py
 python3 scripts/package.py --check
 ```
 
-To build a package for another public page with the same `status.indicator`
-schema, use its **direct** `/api/v2/status.json` endpoint:
+See [Build and validate](docs/authoring.md) for custom Statuspage services,
+the shared host validator and fixture-based checks. `plugin.json` is the
+Claude source manifest; the build script derives the OpenAI and GitHub packages.
 
-```sh
-python3 scripts/package.py --custom example "Example Service" \
-  https://status.example.com/api/v2/status.json
-```
-
-This creates `status-example.aimplugin` with its own stable plugin ID. Use a
-different lowercase ID for each service; the preset IDs `claude`, `openai`,
-and `github` are reserved. The display name may contain up to 16 printable
-ASCII characters, excluding braces. Confirm that the endpoint returns JSON
-with `status.indicator` and the standard Statuspage values. Then run the
-`inspect` and `render` commands below with your new package name before
-installing. The plugin host does not follow HTTP redirects, so use the final
-HTTPS address. No account or API key should appear in the URL.
-
-## Validate
-
-Run `python3 scripts/package.py --check` to verify that the committed packages
-match the source manifest. With the AI Monitor checkout alongside this
-repository, run the shared host validator and render the synthetic fixture:
-
-```sh
-cargo run --quiet --locked --manifest-path ../esp32-ai-monitor/companion-windows/Cargo.toml \
-  -p aimonitor-plugin-host -- inspect status-claude.aimplugin
-cargo run --quiet --locked --manifest-path ../esp32-ai-monitor/companion-windows/Cargo.toml \
-  -p aimonitor-plugin-host -- render status-claude.aimplugin - all fixture.json
-cargo run --quiet --locked --manifest-path ../esp32-ai-monitor/companion-windows/Cargo.toml \
-  -p aimonitor-plugin-host -- render status-claude.aimplugin - all fixture.json --locale=de --theme=light
-```
-
-Repeat the `inspect` and `render` commands with `status-openai.aimplugin` and
-`status-github.aimplugin`. Test the remaining status labels and colors by
-substituting `fixtures/operational.json`, `fixtures/major.json`,
-`fixtures/critical.json`, `fixtures/maintenance.json`, and
-`fixtures/unknown.json` for `fixture.json` in the render command. The last
-fixture checks the fallback for an unrecognized indicator. To check the live
-source, omit the fixture path from the render command. This calls the service
-over HTTPS. Then follow the
-[hardware test guide](docs/hardware-test.md) to verify the actual display,
-window switching, offline behavior and restart persistence.
-
-All three built-in endpoints were checked directly on 2026-09-29. They are
-public HTTPS JSON sources and need no API key. Packages are unsigned; the
-companion displays and checks a SHA-256 checksum during installation.
+The packages contain declarative JSON manifests, with no executable plugin
+code. They use one fixed public HTTPS source per service and are independent
+community plugins, not official products of Anthropic, OpenAI or GitHub.

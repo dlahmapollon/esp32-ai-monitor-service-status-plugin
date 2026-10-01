@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# Local chat attachments
+.codex-remote-attachments/

@@ -41,9 +41,9 @@ does not prove that firmware text is unclipped.
 
 ## Verified hardware result — 2026-10-01
 
-Daniel confirmed complete service titles and readable status text for Claude,
+Complete service titles and readable status text were confirmed for Claude,
 OpenAI and GitHub v1.0.1 on a CYD ILI9341, firmware 2.23.0-beta.1, using
-the Windows PR-7 test companion, German language, dark theme and landscape-left
+a Windows development companion, German language, dark theme and landscape-left
 orientation. The device acknowledged scenes for all three live sources.
 Package consistency and 72 host-render combinations (three services, two
 themes, two languages and six status fixtures, each with all layouts) passed.
