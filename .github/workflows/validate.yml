@@ -2,6 +2,7 @@ name: Validate plugin packages
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -17,3 +18,21 @@ jobs:
           python-version: '3.11'
       - name: Check manifest and deterministic packages
         run: python3 scripts/package.py --check
+
+  attention:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      # Pin the format-2 contract while upstream PR #11 is still pending.
+      - uses: actions/checkout@v4
+        with:
+          repository: dlahmapollon/esp32-ai-monitor
+          ref: 5339e9d11e74753e9ad2c528b2d2079fc5a65eb4
+          path: .contract-host
+      - name: Build format-2 plugin host
+        run: cargo build --locked --manifest-path .contract-host/companion-windows/Cargo.toml -p aimonitor-plugin-host
+      - name: Validate disruption rules and scenes
+        run: python3 scripts/test_attention.py .contract-host/companion-windows/target/debug/aimonitor-plugin-host
