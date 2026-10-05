@@ -153,7 +153,7 @@ page's overall state:
 
 Data refreshes approximately every five minutes while the view is assigned to
 a window. The layouts support portrait, landscape and square displays, dark
-and light themes, and English and ASCII-only German text.
+and light themes, and English and German text.
 
 The overall status is an aggregate: an operational page does not guarantee
 that every component, product or account is unaffected. For incident details,
