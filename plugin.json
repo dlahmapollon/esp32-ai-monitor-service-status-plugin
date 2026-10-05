@@ -32,13 +32,13 @@
   "localizations": {
     "de": {
       "Claude Status": "Claude Status",
-      "Public service health from the official Claude status page.": "Oeffentlicher Dienststatus der offiziellen Claude-Statusseite.",
+      "Public service health from the official Claude status page.": "Dienststatus der offiziellen Claude-Statusseite.",
       "Status data by Claude": "Statusdaten von Claude",
       "SERVICE STATUS": "DIENSTSTATUS",
       "Operational": "Betriebsbereit",
-      "Degraded": "Eingeschr\u00e4nkt",
-      "Major outage": "Groessere Stoerung",
-      "Critical outage": "Schwere Stoerung",
+      "Degraded": "Teilausfall",
+      "Major outage": "Erheblicher Ausfall",
+      "Critical outage": "Schwerer Ausfall",
       "Maintenance": "Wartung",
       "Unknown": "Unbekannt",
       "Official status page": "Offizielle Statusseite",
@@ -47,7 +47,7 @@
   },
   "scenes": {
     "portrait": {
-      "background": 1317677,
+      "background": 2828839,
       "nodes": [
         {
           "type": "text",
@@ -190,7 +190,7 @@
       ]
     },
     "landscape": {
-      "background": 1317677,
+      "background": 2828839,
       "nodes": [
         {
           "type": "text",
@@ -326,7 +326,7 @@
       ]
     },
     "square": {
-      "background": 1317677,
+      "background": 2828839,
       "nodes": [
         {
           "type": "text",
@@ -471,7 +471,7 @@
   },
   "lightScenes": {
     "portrait": {
-      "background": 16119802,
+      "background": 16447989,
       "nodes": [
         {
           "type": "text",
@@ -614,7 +614,7 @@
       ]
     },
     "landscape": {
-      "background": 16119802,
+      "background": 16447989,
       "nodes": [
         {
           "type": "text",
@@ -750,7 +750,7 @@
       ]
     },
     "square": {
-      "background": 16119802,
+      "background": 16447989,
       "nodes": [
         {
           "type": "text",
