@@ -187,3 +187,7 @@ Claude source manifest; the build script derives the OpenAI and GitHub packages.
 The packages contain declarative JSON manifests, with no executable plugin
 code. They use one fixed public HTTPS source per service and are independent
 community plugins, not official products of Anthropic, OpenAI or GitHub.
+
+## License
+
+Licensed under the [MIT License](LICENSE).
