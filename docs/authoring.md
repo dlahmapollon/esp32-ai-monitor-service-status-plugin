@@ -4,7 +4,7 @@
 
 `plugin.json` is the Claude source manifest (package v1.1.0, format 2).
 The generated packages inherit its attention rules. Use a plugin host built
-from AI Monitor PR #11 or a later release containing it; older hosts reject
+from macOS 1.32.0 / Windows beta 1.4.1 or a later compatible release; older hosts reject
 these format-2 packages. Python's standard library builds
 the deterministic preset packages:
 
@@ -64,7 +64,7 @@ The rules compare raw `status.indicator` values: `minor`, `major` and
 changes to request attention. Do not match translated display strings.
 `none`, `maintenance`, unknown or missing indicators remain inactive.
 
-Run the integration checks against the actual PR #11 plugin host:
+Run the integration checks against the released format-2 plugin host:
 
 ```sh
 python3 scripts/test_attention.py /path/to/aimonitor-plugin-host

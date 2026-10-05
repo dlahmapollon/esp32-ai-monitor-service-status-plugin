@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: tobymarks/esp32-ai-monitor
-          ref: 4a1e5d1
+          ref: d258e4228e2304d2c92cf82e85768e8a6d73c865
           path: .contract-host
       - name: Build format-2 plugin host
         run: cargo build --locked --manifest-path .contract-host/companion-windows/Cargo.toml -p aimonitor-plugin-host
