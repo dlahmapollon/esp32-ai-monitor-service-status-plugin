@@ -11,11 +11,17 @@ the ESP32 over USB. No service account or API key is required.
 
 Current package version: **1.1.0** (manifest format **2**).
 
-**Requires an AI Monitor companion build that includes
-[PR #11](https://github.com/tobymarks/esp32-ai-monitor/pull/11).** As of
-2026-10-01, that PR is still open; a generally available release containing
-this feature has not been confirmed. For older compatible companions, use the
-[previous format-1 packages (v1.0.1)](https://github.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/tree/3d71e4d).
+**Requires a companion app with manifest format 2 support.** Upstream
+[PR #11](https://github.com/tobymarks/esp32-ai-monitor/pull/11) is merged.
+As of 2026-10-05, use [macOS 1.32.0](https://github.com/tobymarks/esp32-ai-monitor/releases/tag/app-v1.32.0)
+or [Windows beta 1.4.1](https://github.com/tobymarks/esp32-ai-monitor/releases/tag/win-beta-v1.4.1).
+Windows stable 1.3.0 and older Mac apps cannot install these packages.
+
+For older companions, download the fixed **format-1 v1.0.1** packages:
+[Claude](https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/3d71e4d370095b7625a18eafad4d90389e5d9ae6/status-claude.aimplugin),
+[OpenAI](https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/3d71e4d370095b7625a18eafad4d90389e5d9ae6/status-openai.aimplugin),
+[GitHub](https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/3d71e4d370095b7625a18eafad4d90389e5d9ae6/status-github.aimplugin).
+These links stay on v1.0.1 and do not provide intelligent switching.
 
 | Service | Download package | Official status page |
 | --- | --- | --- |
@@ -30,7 +36,7 @@ view that you can assign to a display window.
 
 - An AI Monitor ESP32 display, connected to your computer with a USB data cable.
 - The Windows or macOS AI Monitor companion app with a **Plugins** tab,
-  localization, light scenes and **format-2 attention rules from PR #11**.
+  localization, light scenes and **manifest format 2 support** (see compatible releases above).
 - Firmware that reports `sceneProtocol: 1` in its `get_info` response.
 - Internet access on the computer for the official status feeds.
 
@@ -87,11 +93,12 @@ https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-p
 
 Use the raw package URL, rather than a GitHub `blob` page URL. The links above
 track the packages on `main`; inspecting before installation shows the version
-and checksum you are about to install.
+and checksum you are about to install. These URLs now deliver format 2;
+use the fixed v1.0.1 links above if your companion is older.
 
 ## Automatic switching when a service is disrupted
 
-1. Install the v1.1.0 package in a companion build containing PR #11.
+1. Install the v1.1.0 package in a compatible companion app listed above.
 2. Add its service view to a Display window.
 3. Select **Intelligent switching** (German: **Intelligenter Wechsel**) as the
    window-switching mode.
@@ -141,7 +148,7 @@ page's overall state:
 | Operational | Green |
 | Degraded | Amber |
 | Major outage / Critical outage | Red |
-| Maintenance | Purple |
+| Maintenance | Slate blue |
 | Unknown | Gray |
 
 Data refreshes approximately every five minutes while the view is assigned to
@@ -157,7 +164,7 @@ open the service's official status page.
 | Symptom | What to check |
 | --- | --- |
 | No Plugins tab | Use a companion build with display-plugin support. |
-| Package rejected | Check support for localization and light scenes; download the actual `.aimplugin` file. |
+| Package rejected / unknown field attentionRules | Update to a format-2 companion listed above, or use the fixed v1.0.1 downloads. Download the actual `.aimplugin` file. |
 | Installed, but nothing appears | Add the service view to a Display window and select it. Check the USB connection. |
 | Error or stale-data screen | Check the computer's internet access and the official status feed. The companion provides the error screens. |
 | No updates after closing the app | Keep the companion running. These plugins fetch data on the computer, not over ESP32 Wi-Fi. |
