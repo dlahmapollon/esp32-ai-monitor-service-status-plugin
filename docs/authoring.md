@@ -2,7 +2,10 @@
 
 ## Build another Statuspage service
 
-`plugin.json` is the Claude source manifest. Python's standard library builds
+`plugin.json` is the Claude source manifest (package v1.1.0, format 2).
+The generated packages inherit its attention rules. Use a plugin host built
+from macOS 1.32.0 / Windows beta 1.4.1 or a later compatible release; older hosts reject
+these format-2 packages. Python's standard library builds
 the deterministic preset packages:
 
 ```sh
@@ -53,3 +56,22 @@ over HTTPS. Then follow the
 [hardware test guide](hardware-test.md) to verify the actual display,
 window switching, offline behavior and restart persistence.
 
+
+## Validate disruption rules
+
+The rules compare raw `status.indicator` values: `minor`, `major` and
+`critical`. Each level has a distinct stable rule ID, allowing severity
+changes to request attention. Do not match translated display strings.
+`none`, `maintenance`, unknown or missing indicators remain inactive.
+
+Run the integration checks against the released format-2 plugin host:
+
+```sh
+python3 scripts/test_attention.py /path/to/aimonitor-plugin-host
+```
+
+These checks validate all packages and render every layout, both themes and
+both languages for each supported indicator and missing data. The host emits
+rule states; baseline tracking and false-to-true switching are owned by the
+companion. See the README for its timing limits. A new manifest field requires
+a higher format version; package version bumps do not replace that requirement.
