@@ -198,3 +198,18 @@ community plugins, not official products of Anthropic, OpenAI or GitHub.
 ## License
 
 Licensed under the [MIT License](LICENSE).
+
+## Configurable HTTPS source (preview)
+
+The new `status-claude-url.aimplugin` package uses plugin format 4 and requires the
+companion with configurable data-URL support. Its **Data URL** setting can
+point to another HTTPS endpoint returning the same JSON structure. Numeric
+placeholders in the weather URL keep the latitude/longitude controls working.
+The installed source origin follows the saved URL. A private CA must be trusted
+by the companion's operating system; certificate verification is enabled.
+Existing format-1/2 package archives remain available for older companions.
+
+Build and check this variant with `python3 scripts/package.py` and
+`python3 scripts/package.py --check`. It is a preview, not a released asset.
+
+Preview download: [status-claude-url.aimplugin](https://raw.githubusercontent.com/dlahmapollon/esp32-ai-monitor-service-status-plugin/codex/configurable-source/status-claude-url.aimplugin).
