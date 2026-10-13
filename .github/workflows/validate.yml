@@ -26,13 +26,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      # Pin the merged upstream format-2 contract (Mac 1.32.0).
+      # Pin the reviewed format-4 companion contract used for this preview.
       - uses: actions/checkout@v4
         with:
-          repository: tobymarks/esp32-ai-monitor
-          ref: d258e4228e2304d2c92cf82e85768e8a6d73c865
+          repository: dlahmapollon/esp32-ai-monitor
+          ref: 01743b7b4b8da083a3c20de1b2e7b5b36989c176
           path: .contract-host
-      - name: Build format-2 plugin host
+      - name: Build format-4 plugin host
         run: cargo build --locked --manifest-path .contract-host/companion-windows/Cargo.toml -p aimonitor-plugin-host
       - name: Validate disruption rules and scenes
         run: python3 scripts/test_attention.py .contract-host/companion-windows/target/debug/aimonitor-plugin-host

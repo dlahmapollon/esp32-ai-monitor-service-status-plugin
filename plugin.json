@@ -1,18 +1,27 @@
 {
-  "formatVersion": 2,
+  "formatVersion": 4,
   "id": "org.aimonitor.status.claude",
   "name": "Claude Status",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "AI Monitor contributors",
   "description": "Public service health from the official Claude status page.",
   "viewLabel": "Claude",
   "attribution": "Status data by Claude",
   "minSceneProtocol": 1,
   "source": {
-    "url": "https://status.claude.com/api/v2/status.json",
-    "intervalSeconds": 300
+    "intervalSeconds": 300,
+    "urlSetting": "endpoint"
   },
-  "settings": [],
+  "settings": [
+    {
+      "key": "endpoint",
+      "label": "Data URL",
+      "kind": "url",
+      "default": "https://status.claude.com/api/v2/status.json",
+      "min": null,
+      "max": null
+    }
+  ],
   "bindings": [
     {
       "name": "state",
@@ -42,7 +51,8 @@
       "Maintenance": "Wartung",
       "Unknown": "Unbekannt",
       "Official status page": "Offizielle Statusseite",
-      "Updated every 5 min": "Update alle 5 Min"
+      "Updated every 5 min": "Update alle 5 Min",
+      "Data URL": "Daten-URL"
     }
   },
   "scenes": {

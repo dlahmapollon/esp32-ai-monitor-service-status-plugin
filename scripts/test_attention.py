@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate status packages and attention states with the real format-2 host."""
+"""Validate status packages and attention states with the real format-4 host."""
 import argparse
 import json
 import subprocess
@@ -15,16 +15,16 @@ EXPECTED = {
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("host", help="PR #11 aimonitor-plugin-host executable")
+    parser.add_argument("host", help="Format-4 aimonitor-plugin-host executable")
     host = str(Path(parser.parse_args().host).resolve())
     checks = 0
     with tempfile.TemporaryDirectory() as temp:
         fixture = Path(temp) / "source.json"
         for service in ("claude", "openai", "github"):
-            package = ROOT / f"status-{service}.aimplugin"
+            package = ROOT / f"status-{service}-url.aimplugin"
             info = json.loads(subprocess.check_output([host, "inspect", str(package)], text=True))
             assert info["id"] == f"org.aimonitor.status.{service}"
-            assert info["version"] == "1.1.0"
+            assert info["version"] == "1.2.0"
             for indicator, active in EXPECTED.items():
                 fixture.write_text(json.dumps({"status": {"indicator": indicator}} if indicator is not None else {}))
                 for theme in ("dark", "light"):

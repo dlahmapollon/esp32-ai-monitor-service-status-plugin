@@ -57,7 +57,7 @@ def make_manifest(slug: str, name: str, url: str) -> bytes:
         return value
 
     manifest = rename(manifest)
-    manifest["source"]["url"] = validated_url
+    next(setting for setting in manifest["settings"] if setting["key"] == "endpoint")["default"] = validated_url
     if len(name) > 10:
         # Keep longer custom names within the title boxes on smaller panels.
         for variant in ("scenes", "lightScenes"):
@@ -101,7 +101,7 @@ def main() -> None:
             package = make_package(make_manifest(slug, name, url))
         except ValueError as error:
             parser.error(str(error))
-        path = ROOT / f"status-{slug}.aimplugin"
+        path = ROOT / f"status-{slug}-url.aimplugin"
         if args.check:
             if not path.is_file():
                 parser.error(f"{path.name} is missing; run python3 scripts/package.py")
